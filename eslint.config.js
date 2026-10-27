@@ -25,6 +25,14 @@ export default defineConfig([
   ...pluginVue.configs['flat/essential'],
 
   {
+    name: 'app/360-viewer-name',
+    files: ['src/components/360/Viewer360.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+
+  {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
