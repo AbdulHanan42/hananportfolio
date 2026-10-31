@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+import { RouterView } from 'vue-router'
+
+import TheFooter from '@/components/layout/TheFooter.vue'
+import TheNavbar from '@/components/layout/TheNavbar.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="flex min-h-screen flex-col">
+    <TheNavbar />
+    <main class="flex-1">
+      <RouterView />
+    </main>
+    <TheFooter />
+  </div>
 </template>
-
-<style scoped></style>
