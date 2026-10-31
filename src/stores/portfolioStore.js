@@ -15,7 +15,7 @@ export const usePortfolioStore = defineStore('portfolio', {
       location: 'Pakistan · Working worldwide',
       availability: 'Available for freelance & contract work',
       email: 'hello@abdulhanan.dev',
-      stack: ['Vue 3', 'FastAPI', 'Laravel', 'MySQL'],
+      stack: ['React', 'FastAPI', 'Laravel', 'MySQL'],
     },
 
     hero: {
