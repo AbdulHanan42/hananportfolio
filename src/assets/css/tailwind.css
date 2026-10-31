@@ -4,15 +4,31 @@
 
 @layer base {
   :root {
-    /* Raw RGB channels so Tailwind can compose them with <alpha-value> */
-    --color-bg-base: 15 23 42;
-    --color-bg-surface: 30 41 59;
-    --color-bg-raised: 51 65 85;
-    --color-text-main: 248 250 252;
-    --color-text-muted: 148 163 184;
-    --color-line: 71 85 105;
-    --color-accent: 56 189 248;
-    --color-accent-ink: 8 47 73;
+    /* Brand */
+    --primary-color: #38bdf8;
+    --primary-strong-color: #0ea5e9;
+    --primary-ink-color: #082f49;
+    --primary-soft-color: #38bdf833;
+    --primary-glow-color: #38bdf81f;
+
+    /* Surface */
+    --background-color: #0f172a;
+    --background-glass-color: #0f172ad9;
+    --surface-color: #1e293b;
+    --surface-soft-color: #1e293b66;
+    --surface-glass-color: #1e293b80;
+    --surface-strong-color: #1e293bcc;
+    --raised-color: #334155;
+
+    /* Text */
+    --foreground-color: #f8fafc;
+    --muted-color: #94a3b8;
+    --muted-soft-color: #94a3b8b3;
+
+    /* Border */
+    --border-color: #334155;
+    --border-soft-color: #47556999;
+    --border-strong-color: #475569;
   }
 
   html {
@@ -22,33 +38,29 @@
   body {
     @apply bg-background text-foreground antialiased;
     background-image:
-      radial-gradient(60rem 32rem at 85% -10%, rgb(var(--color-accent) / 0.12), transparent 70%),
-      radial-gradient(48rem 28rem at 0% 20%, rgb(var(--color-accent) / 0.06), transparent 70%);
+      radial-gradient(60rem 32rem at 85% -10%, var(--primary-glow-color), transparent 70%),
+      radial-gradient(48rem 28rem at 0% 20%, var(--primary-glow-color), transparent 70%);
     background-repeat: no-repeat;
   }
 
   ::selection {
-    background-color: rgb(var(--color-accent) / 0.35);
-    color: rgb(var(--color-text-main));
+    background-color: var(--primary-soft-color);
+    color: var(--foreground-color);
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--color-accent));
+    outline: 2px solid var(--primary-color);
     outline-offset: 3px;
   }
 }
 
 @layer components {
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent;
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-primary;
   }
 
   .text-gradient {
-    background-image: linear-gradient(
-      115deg,
-      rgb(var(--color-text-main)) 20%,
-      rgb(var(--color-accent)) 100%
-    );
+    background-image: linear-gradient(115deg, var(--foreground-color) 20%, var(--primary-color) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -75,6 +87,68 @@
     }
   }
 
+  .avatar-speaking {
+    animation: avatar-bob 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  @keyframes avatar-bob {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+
+    25% {
+      transform: translate3d(-5px, -8px, 0) rotate(-1.2deg) scale(1.012);
+    }
+
+    50% {
+      transform: translate3d(4px, -2px, 0) rotate(1deg) scale(1);
+    }
+
+    75% {
+      transform: translate3d(-3px, -9px, 0) rotate(-0.6deg) scale(1.008);
+    }
+  }
+
+  .speak-ring {
+    animation: speak-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @keyframes speak-ring {
+    0% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+
+    70%,
+    100% {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+  }
+
+  .eq-bar {
+    transform-origin: bottom;
+    transform: scaleY(0.35);
+    animation: eq-bounce 1.1s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .is-speaking .eq-bar {
+    animation-play-state: running;
+  }
+
+  @keyframes eq-bounce {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -84,7 +158,10 @@
       opacity: 1;
     }
 
-    .reveal.is-visible {
+    .reveal.is-visible,
+    .avatar-speaking,
+    .speak-ring,
+    .eq-bar {
       animation: none;
     }
   }

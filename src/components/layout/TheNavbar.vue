@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-import PrimaryButton from '@/components/common/PrimaryButton.vue'
+import BaseButton from '@/components/common/BaseButton.vue'
 import { usePortfolioStore } from '@/stores/portfolioStore'
 
 const store = usePortfolioStore()
@@ -25,12 +25,12 @@ onBeforeUnmount(() => {
 <template>
   <header
     class="sticky top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300"
-    :class="scrolled ? 'border-line/70 bg-background/85' : 'border-transparent bg-background/40'"
+    :class="scrolled ? 'border-line-soft bg-background-glass' : 'border-transparent bg-transparent'"
   >
     <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3 sm:px-8">
       <a href="#home" class="group inline-flex items-center gap-3" @click="open = false">
         <span
-          class="grid size-10 place-items-center rounded-xl border border-line/70 bg-surface text-sm font-bold text-accent transition group-hover:border-accent/60"
+          class="grid size-10 place-items-center rounded-xl border border-line-soft bg-surface text-sm font-bold text-primary transition group-hover:border-primary"
         >
           {{ store.profile.initials }}
         </span>
@@ -51,11 +51,11 @@ onBeforeUnmount(() => {
         </a>
       </nav>
 
-      <PrimaryButton href="#contact" size="sm" class="hidden md:inline-flex">Let's talk</PrimaryButton>
+      <BaseButton href="#contact" size="sm" class="hidden md:inline-flex">Let's talk</BaseButton>
 
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-xl border border-line/70 bg-surface/60 text-foreground transition hover:border-accent/50 md:hidden"
+        class="grid size-10 place-items-center rounded-xl border border-line-soft bg-surface-soft text-foreground transition hover:border-primary md:hidden"
         :aria-expanded="open"
         aria-controls="mobile-nav"
         :aria-label="open ? 'Close menu' : 'Open menu'"
@@ -79,7 +79,7 @@ onBeforeUnmount(() => {
       <nav
         v-if="open"
         id="mobile-nav"
-        class="border-t border-line/60 bg-background/95 px-5 pb-5 pt-3 md:hidden"
+        class="border-t border-line-soft bg-background-glass px-5 pb-5 pt-3 md:hidden"
         aria-label="Mobile"
       >
         <a
@@ -91,9 +91,9 @@ onBeforeUnmount(() => {
         >
           {{ link.label }}
         </a>
-        <PrimaryButton href="#contact" size="sm" class="mt-3 w-full" @click="open = false">
+        <BaseButton href="#contact" size="sm" class="mt-3 w-full" @click="open = false">
           Let's talk
-        </PrimaryButton>
+        </BaseButton>
       </nav>
     </Transition>
   </header>

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+import avatarImage from '@/assets/images/avatar-abdul-hanan.webp'
+
 // All page content lives here — sections only render this state.
 export const usePortfolioStore = defineStore('portfolio', {
   state: () => ({
@@ -13,7 +15,28 @@ export const usePortfolioStore = defineStore('portfolio', {
       location: 'Pakistan · Working worldwide',
       availability: 'Available for freelance & contract work',
       email: 'hello@abdulhanan.dev',
-      stack: ['Vue 3', 'Pinia', 'Tailwind CSS'],
+      stack: ['Vue 3', 'FastAPI', 'Laravel', 'MySQL'],
+    },
+
+    hero: {
+      greeting: 'Hello, I am',
+      introCta: 'Introduce myself',
+      introStop: 'Stop introducing',
+      introNote: 'Voice introduction',
+      speakingLabel: 'Speaking now',
+      idleLabel: 'Tap to hear my introduction',
+    },
+
+    avatar: {
+      src: avatarImage,
+      alt: 'Illustrated portrait of Abdul Hanan wearing headphones around his neck',
+    },
+
+    intro: {
+      audioSrc: '/audio/intro.wav',
+      duration: '0:24',
+      script:
+        'Hi, I am Abdul Hanan. I am a full-stack web developer. I build fast, accessible interfaces with Vue 3, Pinia and Tailwind CSS, and I care about clean architecture, smooth motion and the details that make a product feel effortless. Take a look around, and if you have a project in mind, let us talk.',
     },
 
     nav: [

@@ -64,14 +64,14 @@ function onStagePointerDown(event) {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-3xl border border-line/60 bg-surface/40">
+  <div class="overflow-hidden rounded-3xl border border-line-soft bg-surface-soft">
     <div class="flex flex-col gap-3 p-5 sm:p-6 lg:flex-row lg:items-end lg:justify-between">
       <div class="max-w-xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{{ eyebrow }}</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{{ eyebrow }}</p>
         <h3 class="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">{{ title }}</h3>
         <p class="mt-2 text-sm leading-relaxed text-muted">{{ description }}</p>
       </div>
-      <p class="hidden text-xs text-muted/80 sm:block">Drag · scroll to zoom · open a hotspot</p>
+      <p class="hidden text-xs text-muted-soft sm:block">Drag · scroll to zoom · open a hotspot</p>
     </div>
 
     <div
@@ -97,11 +97,11 @@ function onStagePointerDown(event) {
         v-else-if="failed || !image"
         class="absolute inset-0 grid place-items-center p-6 text-center"
       >
-        <div class="max-w-sm rounded-2xl border border-dashed border-line/70 bg-surface/40 p-6">
+        <div class="max-w-sm rounded-2xl border border-dashed border-line-soft bg-surface-soft p-6">
           <p class="text-sm font-semibold">No panorama loaded</p>
           <p class="mt-1 text-xs leading-relaxed text-muted">
             Add a 2:1 equirectangular image to
-            <code class="rounded bg-background/60 px-1 py-0.5 text-accent">public/360-assets</code>
+            <code class="rounded bg-background-glass px-1 py-0.5 text-primary">public/360-assets</code>
             and set its path on the showcase in the store.
           </p>
         </div>
@@ -118,14 +118,14 @@ function onStagePointerDown(event) {
         class="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-md transition duration-300"
         :class="
           marker.visible
-            ? 'border-accent/50 bg-background/80 text-foreground opacity-100'
+            ? 'border-primary bg-background-glass text-foreground opacity-100'
             : 'pointer-events-none border-transparent bg-transparent opacity-0'
         "
         :style="{ left: `${marker.x}px`, top: `${marker.y}px` }"
         @pointerdown.stop
         @click.stop="openHotspot(marker)"
       >
-        <span class="size-1.5 rounded-full bg-accent" aria-hidden="true" />
+        <span class="size-1.5 rounded-full bg-primary" aria-hidden="true" />
         {{ marker.title }}
       </button>
 
@@ -135,8 +135,8 @@ function onStagePointerDown(event) {
           class="grid size-9 place-items-center rounded-lg border backdrop-blur-md transition"
           :class="
             autoRotate
-              ? 'border-accent bg-accent text-accent-ink'
-              : 'border-line/70 bg-background/70 text-foreground hover:border-accent/50'
+              ? 'border-primary bg-primary text-primary-ink'
+              : 'border-line-soft bg-background-glass text-foreground hover:border-primary'
           "
           :aria-pressed="autoRotate"
           aria-label="Toggle auto-rotation"
@@ -151,7 +151,7 @@ function onStagePointerDown(event) {
         </button>
         <button
           type="button"
-          class="grid size-9 place-items-center rounded-lg border border-line/70 bg-background/70 text-foreground backdrop-blur-md transition hover:border-accent/50"
+          class="grid size-9 place-items-center rounded-lg border border-line-soft bg-background-glass text-foreground backdrop-blur-md transition hover:border-primary"
           aria-label="Reset view"
           @click="reset"
         >
@@ -166,7 +166,7 @@ function onStagePointerDown(event) {
         v-if="!activeHotspot"
         class="pointer-events-none absolute inset-x-0 bottom-3 z-10 flex justify-center px-3"
       >
-        <span class="rounded-full border border-line/60 bg-background/70 px-3 py-1 text-[0.7rem] text-muted backdrop-blur-md">
+        <span class="rounded-full border border-line-soft bg-background-glass px-3 py-1 text-[0.7rem] text-muted backdrop-blur-md">
           Drag to look around · scroll or pinch to zoom
         </span>
       </p>
@@ -179,17 +179,17 @@ function onStagePointerDown(event) {
       >
         <article
           v-if="activeHotspot"
-          class="absolute inset-x-3 bottom-3 z-20 rounded-2xl border border-line/70 bg-background/85 p-4 backdrop-blur-md sm:inset-x-auto sm:left-4 sm:w-80"
+          class="absolute inset-x-3 bottom-3 z-20 rounded-2xl border border-line-soft bg-background-glass p-4 backdrop-blur-md sm:inset-x-auto sm:left-4 sm:w-80"
           aria-live="polite"
         >
           <div class="flex items-start justify-between gap-3">
             <div class="min-w-0">
-              <p class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-accent">Hotspot</p>
+              <p class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-primary">Hotspot</p>
               <h4 class="mt-1 text-base font-semibold">{{ activeHotspot.title }}</h4>
             </div>
             <button
               type="button"
-              class="grid size-8 shrink-0 place-items-center rounded-lg border border-line/60 text-muted transition hover:border-accent/50 hover:text-foreground"
+              class="grid size-8 shrink-0 place-items-center rounded-lg border border-line-soft text-muted transition hover:border-primary hover:text-foreground"
               aria-label="Close hotspot details"
               @click="activeHotspot = null"
             >
